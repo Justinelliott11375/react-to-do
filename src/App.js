@@ -6,9 +6,9 @@ class App extends Component {
     super(props);
     this.state = {
       todos: [
-        { description: 'Walk the cat', isCompleted: true},
-        { description: 'Throw the dishes away', isCompleted: false},
-        { description: 'Buy new dishes', isCompleted: false}
+        { description: 'Walk the cat', isCompleted: true, deleteMe: false},
+        { description: 'Throw the dishes away', isCompleted: false, deleteMe: false},
+        { description: 'Buy new dishes', isCompleted: false, deleteMe: false}
       ],
       newToDoDescription: ''
     };
@@ -21,7 +21,7 @@ class App extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if (!this.state.newToDoDescription) { return }
-    const newToDo = { description: this.state.newToDoDescription, isCompleted: false };
+    const newToDo = { description: this.state.newToDoDescription, isCompleted: false, deleteMe: false };
     this.setState({ todos: [...this.state.todos, newToDo], newToDoDescription: '' })
   }
 
@@ -32,6 +32,10 @@ class App extends Component {
     this.setState({ todos: todos });
   }
 
+  deleteToDo() {
+    const todos = this.state.todos.filter(item => item.deleteMe: false)
+    this.setState({todos: todos})
+  }
   render() {
     return (
       <div className="App">
